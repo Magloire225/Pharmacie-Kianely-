@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pharmacie Kianely</title>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #00C48C;
+    --green-dark: #009E72;
+    --yellow: #FFD166;
+    --pink: #FF6B9D;
+    --blue: #4ECDC4;
+    --purple: #A78BFA;
+    --dark: #1A1A2E;
+    --white: #FFFFFF;
+    --light-bg: #F0FDF9;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--light-bg);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(14px);
+    border-bottom: 3px solid var(--green);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 70px;
+    box-shadow: 0 4px 24px rgba(0,196,140,0.10);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 0.7rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800; font-size: 1.4rem;
+    color: var(--dark);
+  }
+  .nav-logo .cross {
+    display: grid; place-items: center;
+    width: 38px; height: 38px;
+    background: var(--green);
+    border-radius: 10px;
+    font-size: 1.4rem;
+    color: white;
+    font-weight: 900;
+    box-shadow: 0 4px 12px rgba(0,196,140,0.35);
+    animation: pulse-logo 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse-logo {
+    0%,100%{ box-shadow: 0 4px 12px rgba(0,196,140,0.35); }
+    50%{ box-shadow: 0 4px 24px rgba(0,196,140,0.65); }
+  }
+  .nav-links { display: flex; gap: 0.3rem; }
+  .nav-links a {
+    text-decoration: none; color: var(--dark);
+    font-weight: 700; font-size: 0.95rem;
+    padding: 0.45rem 1rem;
+    border-radius: 50px;
+    transition: all .2s;
+  }
+  .nav-links a:hover {
+    background: var(--green); color: white;
+    transform: translateY(-2px);
+  }
+
+  /* ── HERO ── */
+  #accueil {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 100px 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #e0fdf4 0%, #f0fffe 40%, #fef9ee 100%);
+  }
+  .hero-bg-shapes {
+    position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+  }
+  .shape {
+    position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.35;
+    animation: float-shape 8s ease-in-out infinite;
+  }
+  .shape-1 { width: 420px; height: 420px; background: var(--green); top: -80px; right: -100px; animation-delay: 0s; }
+  .shape-2 { width: 300px; height: 300px; background: var(--yellow); bottom: -60px; left: 10%; animation-delay: 2s; }
+  .shape-3 { width: 250px; height: 250px; background: var(--pink); top: 30%; left: -80px; animation-delay: 4s; }
+  .shape-4 { width: 200px; height: 200px; background: var(--blue); bottom: 10%; right: 15%; animation-delay: 1s; }
+  @keyframes float-shape {
+    0%,100%{ transform: translateY(0) scale(1); }
+    50%{ transform: translateY(-25px) scale(1.05); }
+  }
+
+  .hero-content {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+    position: relative; z-index: 2;
+  }
+  .hero-text { animation: slide-in-left 0.8s cubic-bezier(.22,1,.36,1) both; }
+  @keyframes slide-in-left {
+    from { opacity: 0; transform: translateX(-40px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--yellow); color: var(--dark);
+    font-weight: 800; font-size: 0.85rem;
+    padding: 0.35rem 1rem; border-radius: 50px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 3px 10px rgba(255,209,102,0.5);
+    letter-spacing: 0.03em;
+  }
+  .hero-badge::before { content: "⚕️"; font-size: 1rem; }
+  .hero-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+    color: var(--dark);
+  }
+  .hero-title .accent { color: var(--green); position: relative; }
+  .hero-title .accent::after {
+    content: '';
+    position: absolute; bottom: 2px; left: 0; right: 0;
+    height: 8px;
+    background: var(--yellow);
+    border-radius: 4px; z-index: -1;
+    opacity: 0.6;
+  }
+  .hero-subtitle {
+    font-size: 1.15rem; font-weight: 600; color: #555;
+    margin-bottom: 2rem; line-height: 1.7;
+    max-width: 440px;
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: 'Nunito', sans-serif; font-weight: 800;
+    font-size: 1rem; text-decoration: none;
+    padding: 0.8rem 1.8rem; border-radius: 50px;
+    transition: all .25s; cursor: pointer; border: none;
+  }
+  .btn-primary {
+    background: var(--green); color: white;
+    box-shadow: 0 6px 20px rgba(0,196,140,0.4);
+  }
+  .btn-primary:hover {
+    background: var(--green-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(0,196,140,0.5);
+  }
+  .btn-outline {
+    background: transparent; color: var(--dark);
+    border: 3px solid var(--dark);
+  }
+  .btn-outline:hover {
+    background: var(--dark); color: white;
+    transform: translateY(-3px);
+  }
+
+  /* Hero visual */
+  .hero-visual {
+    display: flex; justify-content: center; align-items: center;
+    position: relative;
+    animation: slide-in-right 0.8s cubic-bezier(.22,1,.36,1) 0.2s both;
+  }
+  @keyframes slide-in-right {
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  .big-cross {
+    width: 260px; height: 260px;
+    position: relative; display: grid; place-items: center;
+  }
+  .big-cross::before, .big-cross::after {
+    content: '';
+    position: absolute;
+    background: var(--green);
+    border-radius: 18px;
+  }
+  .big-cross::before { width: 80px; height: 220px; }
+  .big-cross::after { width: 220px; height: 80px; }
+  .cross-inner {
+    z-index: 2; text-align: center; color: white; font-weight: 900;
+  }
+  .cross-inner .letter { font-size: 3rem; line-height: 1; display: block; }
+  .pill-cards {
+    position: absolute;
+    display: flex; flex-direction: column; gap: 1rem;
+    right: -30px; top: 50%; transform: translateY(-50%);
+  }
+  .pill-card {
+    background: white;
+    border-radius: 16px;
+    padding: 0.7rem 1rem;
+    display: flex; align-items: center; gap: 0.6rem;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.10);
+    font-weight: 700; font-size: 0.85rem;
+    white-space: nowrap;
+    animation: pop-in 0.5s cubic-bezier(.22,1,.36,1) both;
+  }
+  .pill-card:nth-child(1){ animation-delay: 0.6s; border-left: 4px solid var(--green); }
+  .pill-card:nth-child(2){ animation-delay: 0.8s; border-left: 4px solid var(--yellow); }
+  .pill-card:nth-child(3){ animation-delay: 1s; border-left: 4px solid var(--pink); }
+  @keyframes pop-in {
+    from { opacity: 0; transform: scale(0.7) translateX(20px); }
+    to { opacity: 1; transform: scale(1) translateX(0); }
+  }
+  .pill-icon { font-size: 1.3rem; }
+
+  /* ── STATS BAND ── */
+  .stats-band {
+    background: var(--dark);
+    padding: 2rem;
+    display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap;
+  }
+  .stat { text-align: center; color: white; }
+  .stat-num {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2.2rem; font-weight: 900;
+    color: var(--green);
+    display: block;
+  }
+  .stat-label { font-size: 0.9rem; opacity: 0.75; font-weight: 600; }
+
+  /* ── SERVICES ── */
+  #services {
+    padding: 6rem 2rem;
+    background: white;
+  }
+  .section-header {
+    text-align: center; margin-bottom: 3.5rem;
+  }
+  .section-tag {
+    display: inline-block;
+    background: var(--green); color: white;
+    font-weight: 800; font-size: 0.8rem;
+    padding: 0.3rem 1rem; border-radius: 50px;
+    margin-bottom: 1rem; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .section-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 900; color: var(--dark);
+    margin-bottom: 0.8rem;
+  }
+  .section-sub { font-size: 1.05rem; color: #666; font-weight: 600; max-width: 500px; margin: 0 auto; }
+
+  .services-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+  .service-card {
+    border-radius: 24px;
+    padding: 2rem;
+    position: relative; overflow: hidden;
+    transition: transform .3s, box-shadow .3s;
+    cursor: default;
+  }
+  .service-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.12); }
+  .service-card:nth-child(1){ background: linear-gradient(135deg, #d1fae5, #a7f3d0); }
+  .service-card:nth-child(2){ background: linear-gradient(135deg, #fef3c7, #fde68a); }
+  .service-card:nth-child(3){ background: linear-gradient(135deg, #fce7f3, #fbcfe8); }
+  .service-card:nth-child(4){ background: linear-gradient(135deg, #dbeafe, #bfdbfe); }
+  .service-card:nth-child(5){ background: linear-gradient(135deg, #ede9fe, #ddd6fe); }
+  .service-card:nth-child(6){ background: linear-gradient(135deg, #d1fae5, #6ee7b7); }
+  .service-emoji { font-size: 2.8rem; margin-bottom: 1rem; display: block; }
+  .service-name {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.2rem; font-weight: 900; color: var(--dark); margin-bottom: 0.5rem;
+  }
+  .service-desc { font-size: 0.93rem; color: #444; line-height: 1.6; font-weight: 600; }
+  .card-deco {
+    position: absolute; bottom: -20px; right: -20px;
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.35);
+  }
+
+  /* ── HORAIRES & CONTACT ── */
+  #contact {
+    padding: 6rem 2rem;
+    background: linear-gradient(135deg, #f0fdf9 0%, #fef9ee 100%);
+  }
+  .contact-grid {
+    max-width: 1000px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start;
+  }
+  .horaires-card {
+    background: white; border-radius: 28px; padding: 2.5rem;
+    box-shadow: 0 8px 40px rgba(0,196,140,0.12);
+    border-top: 6px solid var(--green);
+  }
+  .card-title {
+    display: flex; align-items: center; gap: 0.7rem;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.4rem; font-weight: 900; margin-bottom: 1.8rem; color: var(--dark);
+  }
+  .card-title .icon {
+    width: 42px; height: 42px;
+    border-radius: 12px;
+    display: grid; place-items: center;
+    font-size: 1.2rem;
+    background: var(--green); color: white;
+  }
+  .horaire-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 2px dashed #e5e7eb;
+    font-weight: 600;
+  }
+  .horaire-row:last-child { border-bottom: none; }
+  .day { color: #555; font-size: 0.95rem; }
+  .time {
+    background: var(--light-bg);
+    color: var(--green-dark);
+    font-weight: 800;
+    padding: 0.25rem 0.8rem;
+    border-radius: 50px; font-size: 0.9rem;
+  }
+  .time.closed { background: #fee2e2; color: #ef4444; }
+
+  .contact-card {
+    background: var(--dark); border-radius: 28px; padding: 2.5rem;
+    box-shadow: 0 8px 40px rgba(26,26,46,0.18);
+  }
+  .contact-card .card-title { color: white; }
+  .contact-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.85);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .contact-item:last-child { border-bottom: none; }
+  .contact-item:hover { color: var(--green); }
+  .contact-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: grid; place-items: center; font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .ci-1 { background: rgba(0,196,140,0.2); }
+  .ci-2 { background: rgba(255,209,102,0.2); }
+  .ci-3 { background: rgba(255,107,157,0.2); }
+  .ci-4 { background: rgba(167,139,250,0.2); }
+  .contact-label { font-size: 0.78rem; opacity: 0.55; display: block; margin-bottom: 0.1rem; letter-spacing: 0.04em; text-transform: uppercase; }
+  .contact-value { font-size: 1rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    border-top: 4px solid var(--green);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.9rem; font-weight: 600;
+  }
+  footer strong { color: var(--green); }
+
+  /* ── FLOATING CROSS ── */
+  .floating-badge {
+    position: fixed; bottom: 2rem; right: 2rem;
+    width: 56px; height: 56px;
+    background: var(--green);
+    border-radius: 16px;
+    display: grid; place-items: center;
+    font-size: 1.8rem;
+    box-shadow: 0 8px 24px rgba(0,196,140,0.45);
+    cursor: pointer; z-index: 99;
+    text-decoration: none;
+    animation: bounce-badge 3s ease-in-out infinite;
+  }
+  @keyframes bounce-badge {
+    0%,100%{ transform: translateY(0); }
+    50%{ transform: translateY(-8px); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero-content { grid-template-columns: 1fr; text-align: center; }
+    .hero-ctas { justify-content: center; }
+    .hero-visual { display: none; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .stats-band { gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="cross">✚</div>
+    Pharmacie Kianely
+  </div>
+  <div class="nav-links">
+    <a href="#accueil">Accueil</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="accueil">
+  <div class="hero-bg-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+    <div class="shape shape-4"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge">Votre pharmacie de confiance</div>
+      <h1 class="hero-title">
+        Bienvenue à la<br>
+        <span class="accent">Pharmacie Kianely</span>
+      </h1>
+      <p class="hero-subtitle">
+        Votre santé est notre priorité. Une équipe disponible, des conseils personnalisés et un large choix de médicaments et produits de santé.
+      </p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary">📍 Nous trouver</a>
+        <a href="#services" class="btn btn-outline">Nos services →</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="big-cross"></div>
+      <div class="pill-cards">
+        <div class="pill-card"><span class="pill-icon">💊</span> Médicaments</div>
+        <div class="pill-card"><span class="pill-icon">🩺</span> Conseils santé</div>
+        <div class="pill-card"><span class="pill-icon">💉</span> Vaccinations</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<div class="stats-band">
+  <div class="stat">
+    <span class="stat-num">6j/7</span>
+    <span class="stat-label">Jours d'ouverture</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">100%</span>
+    <span class="stat-label">Engagement qualité</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">+500</span>
+    <span class="stat-label">Références disponibles</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">⚡ Rapide</span>
+    <span class="stat-label">Préparation d'ordonnances</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header">
+    <div class="section-tag">Nos services</div>
+    <h2 class="section-title">Tout ce dont vous avez besoin 💚</h2>
+    <p class="section-sub">Des services complets pour prendre soin de votre santé au quotidien.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-emoji">💊</span>
+      <div class="service-name">Médicaments sur ordonnance</div>
+      <p class="service-desc">Délivrance rapide de vos prescriptions médicales avec un suivi personnalisé.</p>
+      <div class="card-deco"></div>
+    </div>
+    <div class="service-card">
+      <span class="service-emoji">🌿</span>
+      <div class="service-name">Parapharmacie & Bien-être</div>
+      <p class="service-desc">Cosmétiques, compléments alimentaires, produits naturels et soins du corps.</p>
+      <div class="card-deco"></div>
+    </div>
+    <div class="service-card">
+      <span class="service-emoji">👶</span>
+      <div class="service-name">Espace Bébé & Maman</div>
+      <p class="service-desc">Produits adaptés pour les nourrissons, laits infantiles et soins maternels.</p>
+      <div class="card-deco"></div>
+    </div>
+    <div class="service-card">
+      <span class="service-emoji">💉</span>
+      <div class="service-name">Vaccination</div>
+      <p class="service-desc">Vaccins disponibles sur rendez-vous, administrés par notre équipe qualifiée.</p>
+      <div class="card-deco"></div>
+    </div>
+    <div class="service-card">
+      <span class="service-emoji">🩺</span>
+      <div class="service-name">Conseils & Suivi</div>
+      <p class="service-desc">Mesure de tension, glycémie, conseils nutritionnels et orientation médicale.</p>
+      <div class="card-deco"></div>
+    </div>
+    <div class="service-card">
+      <span class="service-emoji">🚗</span>
+      <div class="service-name">Matériel médical</div>
+      <p class="service-desc">Location et vente de matériel médical : béquilles, tensiomètres, orthèses…</p>
+      <div class="card-deco"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT & HORAIRES -->
+<section id="contact">
+  <div class="section-header">
+    <div class="section-tag">Horaires & Contact</div>
+    <h2 class="section-title">Venez nous rendre visite 🗺️</h2>
+    <p class="section-sub">Nous sommes là pour vous accompagner, 6 jours sur 7.</p>
+  </div>
+  <div class="contact-grid">
+    <div class="horaires-card">
+      <div class="card-title">
+        <div class="icon">🕐</div>
+        Horaires d'ouverture
+      </div>
+      <div class="horaire-row">
+        <span class="day">Lundi – Vendredi</span>
+        <span class="time">09h00 – 18h00</span>
+      </div>
+      <div class="horaire-row">
+        <span class="day">Samedi</span>
+        <span class="time">09h00 – 17h00</span>
+      </div>
+      <div class="horaire-row">
+        <span class="day">Dimanche</span>
+        <span class="time closed">Fermé (sauf garde officielle)</span>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <div class="card-title">
+        <div class="icon">📬</div>
+        Nous contacter
+      </div>
+      <a href="tel:+22510250302 4" class="contact-item">
+        <div class="contact-icon ci-1">📱</div>
+        <div>
+          <span class="contact-label">Mobile</span>
+          <span class="contact-value">+225 10 25 03 02 4</span>
+        </div>
+      </a>
+      <a href="tel:+2252734794197" class="contact-item">
+        <div class="contact-icon ci-2">☎️</div>
+        <div>
+          <span class="contact-label">Fixe</span>
+          <span class="contact-value">+225 27 34 79 41 97</span>
+        </div>
+      </a>
+      <div class="contact-item">
+        <div class="contact-icon ci-3">📞</div>
+        <div>
+          <span class="contact-label">Autres numéros</span>
+          <span class="contact-value">+225 27 34 78 04 27 &nbsp;·&nbsp; +225 74 70 09 43 7</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon ci-4">📍</div>
+        <div>
+          <span class="contact-label">Adresse</span>
+          <span class="contact-value">Route de Facobly, Quartier Belle Ville<br>Man, Côte d'Ivoire<br><small style="opacity:.65;font-size:0.8rem;">Proche du Marché de Man</small></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <strong>Pharmacie Kianely</strong> — Tous droits réservés · Votre sant�
